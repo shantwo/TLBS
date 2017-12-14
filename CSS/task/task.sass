@@ -1,0 +1,51 @@
+.task-container
+  border-bottom: .01em solid $grey
+  padding: .5em
+  position: relative
+  cursor: pointer
+
+.task-title
+  display: block
+  font-size: .9em
+
+.fa-file-archive-o
+  position: absolute
+  top: .5em
+  right: .25em
+  opacity: .4
+  &:hover
+    color: $yellow
+    opacity: 1
+    transform: scale(1.2)
+
+
+
+.fa-trash
+  position: absolute
+  top: .5em
+  right: .25em
+  opacity: .4
+  &:hover
+    color: $red
+    opacity: 1
+    transform: scale(1.2)
+
+.fa-cog
+  position: absolute
+  top: .5em
+  right: 2em
+  opacity: .4
+  &:hover
+    color: $green
+    opacity: 1
+    transform: scale(1.2)
+
+.task-description
+  display: block
+  margin: .5em 0
+  font-size: .9em
+  &:hover
+    color: black
+
+.task-date
+  font-size: .7em

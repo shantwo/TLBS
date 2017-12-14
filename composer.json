@@ -1,0 +1,6 @@
+{
+    "name": "didier/tlbs",
+    "require": {
+        "codeception/codeception": "^2.3"
+    }
+}
