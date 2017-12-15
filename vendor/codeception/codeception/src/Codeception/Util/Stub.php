@@ -48,7 +48,7 @@ class Stub
         $class = self::getClassname($class);
         if (!class_exists($class)) {
             if (interface_exists($class)) {
-                throw new \RuntimeException("Stub::make can't mock interfaces, please use Stub::makeEmpty instead.");
+                throw new \RuntimeException("Stub::make can't mock Interfaces, please use Stub::makeEmpty instead.");
             }
             throw new \RuntimeException("Stubbed class $class doesn't exist.");
         }
