@@ -20,7 +20,7 @@ $(document).ready(function(){
                 if(response === 'OK'){
 
                 localStorage.setItem('User', email);
-                window.location.href = 'http://localhost/TLBS/tasks.php';
+                window.location.href = 'http://localhost/TLBS/App/tasks.php';
 
                 }
             })

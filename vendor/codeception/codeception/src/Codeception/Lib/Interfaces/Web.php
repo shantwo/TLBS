@@ -206,7 +206,7 @@ interface Web
      * ```
      *
      * This function works well when paired with `seeInFormFields()`
-     * for quickly testing CRUD Interfaces and form validation logic.
+     * for quickly testing CRUD interfaces and form validation logic.
      *
      * ``` php
      * <?php

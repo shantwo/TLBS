@@ -4,6 +4,6 @@
         "codeception/codeception": "^2.3"
     },
     "autoload": {
-        "psr-4": {"Tlbs\\": "Tlbs/"}
+        "psr-4": {"Tlbs\\": ["App/Tlbs"]}
     }
 }

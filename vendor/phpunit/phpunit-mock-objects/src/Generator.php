@@ -969,7 +969,7 @@ class PHPUnit_Framework_MockObject_Generator
             }
         }
 
-        // Mocked Interfaces returning 'self' must explicitly declare the
+        // Mocked interfaces returning 'self' must explicitly declare the
         // interface name as the return type. See
         // https://bugs.php.net/bug.php?id=70722
         if ($returnType === 'self') {

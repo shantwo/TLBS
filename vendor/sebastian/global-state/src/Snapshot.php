@@ -228,7 +228,7 @@ class Snapshot
     }
 
     /**
-     * Creates a snapshot user-defined Interfaces.
+     * Creates a snapshot user-defined interfaces.
      */
     private function snapshotInterfaces()
     {
