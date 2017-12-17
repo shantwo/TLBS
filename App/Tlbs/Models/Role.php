@@ -9,36 +9,138 @@
 namespace Tlbs\Models;
 
 
+use Tlbs\Database;
 use Tlbs\Interfaces\iCRUD;
 
 class Role implements iCRUD
 {
+    /**
+     * @var int
+     */
     private $id;
+
+    /**
+     * @var string
+     */
     private $name;
 
-    public function Create($object)
+    /**
+     * Role constructor.
+     * @param $id
+     * @param $name
+     */
+    public function __construct($id = null, $name = '')
     {
-        // TODO: Implement Create() method.
+        $this->id = $id;
+        $this->name = $name;
     }
 
-    public function Read($id)
+    /**
+     * @return int
+     */
+    public function getId()
     {
-        // TODO: Implement Read() method.
+        return $this->id;
     }
 
-    public function Update($id)
+    /**
+     * @param int $id
+     */
+    public function setId($id)
     {
-        // TODO: Implement Update() method.
+        $this->id = $id;
     }
 
-    public function Destroy($id)
+    /**
+     * @return string
+     */
+    public function getName()
     {
-        // TODO: Implement Destroy() method.
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+
+    /**
+     * @param Role $role
+     */
+    public function Create($role)
+    {
+        $database = Database::getInstance();
+
+        $database->query('INSERT INTO tlbs_role (rol_name) VALUES (:role)');
+        $database->bind(':role',$role->getName());
+        $database->execute();
+    }
+
+    /**
+     * @param Role $role
+     * @return Role
+     */
+    public function Read($role)
+    {
+        $database = Database::getInstance();
+
+        $database->query('SELECT * FROM tlbs_role WHERE rol_id = :id');
+        $database->bind(':id', $role->getId());
+        $database->execute();
+        $result = $database->single();
+        $role->setId($result{'rol_id'});
+        $role->setName($result{'rol_name'});
+        return $role;
+    }
+
+    /**
+     * @param Role $role
+     */
+    public function Update($role)
+    {
+        $database = Database::getInstance();
+
+        $database->query('UPDATE tlbs_role SET rol_name = :name WHERE rol_id = :id');
+        $database->bind(':id', $role->getId());
+        $database->bind(':name', $role->getName());
+        $database->execute();
+    }
+
+    /**
+     * @param Role $role
+     */
+    public function Destroy($role)
+    {
+        $database = Database::getInstance();
+
+        $database->query('DELETE FROM tlbs_role WHERE rol_id = :id');
+        $database->bind(':id', $role->getId());
+        $database->execute();
     }
 
     public function ReadAll()
     {
-        // TODO: Implement ReadAll() method.
+        $database = Database::getInstance();
+
+        $database->query('SELECT * FROM tlbs_role');
+        $database->execute();
+        $results = $database->resultset();
+
+        $resultSet = [];
+
+        foreach ($results as $key => $Role){
+            $temp = new self();
+
+            $temp->setId($Role['rol_id']);
+            $temp->setName($Role['rol_name']);
+            $resultSet[$key] = $temp;
+        }
+
+        return $resultSet;
     }
 
 

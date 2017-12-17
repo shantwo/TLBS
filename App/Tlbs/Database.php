@@ -35,6 +35,9 @@ class Database
     private $dbh;
     private $error;
 
+    /**
+     * @var \PDOStatement
+     */
     private $stmt;
 
     /**
@@ -88,7 +91,7 @@ class Database
      * Bind a value to a parameter for a query
      * @param $param
      * @param $value
-     * @param null $type
+     * @param null|int|bool|string $type
      */
     public function bind($param, $value, $type = null){
         if (null === $type) {

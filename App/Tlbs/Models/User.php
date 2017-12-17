@@ -142,6 +142,8 @@ class User implements iCRUD
     public function Read($user)
     {
         $database = Database::getInstance();
+        $temp_role = new Role();
+
 
         $database->query('SELECT * FROM tlbs_user WHERE usr_id = :id');
         $database->bind(':id', $user->getId());
@@ -149,7 +151,8 @@ class User implements iCRUD
         $result = $database->single();
         $user->setPassword($result['usr_password']);
         $user->setEmail($result['user_email']);
-        $user->role = $result['role_rol_id'];
+        $temp_role->setId($result['role_rol_id']);
+        $user->setRole($temp_role->Read($temp_role));
         return $user;
     }
 
@@ -160,7 +163,7 @@ class User implements iCRUD
     {
         $database = Database::getInstance();
 
-        $database->query('UPDATE tlbs_user SET usr_id=:id, usr_password = :password, usr_email = :email, role_rol_id = :role');
+        $database->query('UPDATE tlbs_user SET usr_password = :password, usr_email = :email, role_rol_id = :role WHERE usr_id = :id');
         $database->bind(':id', $user->getId());
         $database->bind(':password', $user->getPassword());
         $database->bind(':email', $user->getEmail());
@@ -193,10 +196,13 @@ class User implements iCRUD
 
         foreach ($results as $key => $User){
             $temp = new self();
+            $temp_role = new Role();
+            $temp_role->setId($User['role_rol_id']);
+
             $temp->setId($User['usr_id']);
             $temp->setEmail($User['usr_email']);
             $temp->setPassword($User['usr_password']);
-            $temp->setRole($User['role_rol_id']);
+            $temp->setRole($temp_role->Read($temp_role));
             $resultSet[$key] = $temp;
         }
 
